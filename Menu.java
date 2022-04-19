@@ -3,29 +3,38 @@ import javax.swing.JOptionPane;
 public class Menu{
 
 
-	public void startMenu(){
+	public static int startMenu(){
 
 		String opc = JOptionPane.showInputDialog(null, "1 - Cadastrar Time \n 2 - Simula Jogo \n 3 - Sair");
-		validaOpc(opc);
+
+		return validaInt(opc);
+
 	};
 
-	private int validaOpc (String opc ){
-		try{
-			int numero = 	Integer.parseInt(opc);
+
+    public static int validaInt(String opc){
+
+        try{
+
+			int numero = Integer.parseInt(opc);
 			return numero;
+            
 
 		}catch(NumberFormatException Erro){
-			printErro("Errro de conversão de inteiro " + Erro.getMessage());
-			return -1;
-		}finally{
+			printErro("Errro opção invalida " + Erro.getMessage());
 			startMenu();
-		}
+			return -1;
 		
-		
-	}
 
-	private void printErro(String msg) {
+		}
+
+    }
+
+    private static void printErro(String msg) {
 		JOptionPane.showMessageDialog(null, msg,"Mensagem De Erro", JOptionPane.ERROR_MESSAGE);
 	}
-	
+
+
+
+    
 }

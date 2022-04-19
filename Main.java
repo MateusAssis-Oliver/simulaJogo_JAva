@@ -1,8 +1,14 @@
 class Main {
   public static void main(String[] args) {
-    Menu menu = new Menu();
 
-    menu.startMenu();
+    
+
+    while(true){
+
+      
+
+      if(Menu.startMenu() == 0 ){break;}
+    }
         
 
   }
