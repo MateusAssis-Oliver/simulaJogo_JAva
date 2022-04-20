@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Time{
 
     private String name;
+    private int pontuacao;
     private int numJogos;
     private int saldoGols;
     private int golsMarcados;
@@ -26,45 +27,52 @@ public class Time{
         this.name = name;
     }
 
+    public int getPontuacao() {
+        return pontuacao;
+    }
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao += pontuacao;
+    }
+
     public int getNumJogos() {
         return numJogos;
     }
-    public void setNumJogos(int numJogos) {
-        this.numJogos = numJogos;
+    public void setNumJogos() {
+        numJogos++;
     }
 
     public int getGolsMarcados() {
         return golsMarcados;
     }
     public void setGolsMarcados(int golsMarcados) {
-        this.golsMarcados = golsMarcados;
+        this.golsMarcados += golsMarcados;
     }
     public int getGolsSofridos() {
         return golsSofridos;
     }
     public void setGolsSofridos(int golsSofridos) {
-        this.golsSofridos = golsSofridos;
+        this.golsSofridos += golsSofridos;
     }
     public int getNumDerrotas() {
         return numDerrotas;
     }
-    public void setNumDerrotas(int numDerrotas) {
-        this.numDerrotas = numDerrotas;
+    public void setNumDerrotas() {
+        numDerrotas++;
     }
     public int getNumEmpate() {
         return numEmpate;
     }
-    public void setNumEmpate(int numEmpate) {
-        this.numEmpate = numEmpate;
+    public void setNumEmpate() {
+        numEmpate++;
     }
-    public void setNumVitorias(int numVitorias) {
-        this.numVitorias = numVitorias;
+    public void setNumVitorias() {
+        numVitorias++;
     }
     public int getNumVitorias() {
         return numVitorias;
     }
     public void setSaldoGols(int saldoGols) {
-        this.saldoGols = saldoGols;
+        this.saldoGols = golsMarcados - golsSofridos;
     }
     public int getSaldoGols() {
         return saldoGols;
@@ -91,6 +99,11 @@ public void showStatus(){
 public void addJogoPassado(Time time)
 {
     jogospassados.add(time);
+}
+
+public boolean percorreJogoPassado(Time time)
+{
+    return jogospassados.contains(time);
 }
 
 };

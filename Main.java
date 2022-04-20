@@ -6,8 +6,9 @@ class Main {
     while(true){
 
       int opc = Menu.startMenu() ;
+      
 
-      if( opc == 0 ){break;}
+      if( opc == 3 ){break;}
     }
         
 
