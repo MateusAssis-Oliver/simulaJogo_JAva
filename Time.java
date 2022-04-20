@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+
 public class Time{
 
-	private String name;
+    private String name;
     private int numJogos;
     private int saldoGols;
     private int golsMarcados;
@@ -8,8 +10,13 @@ public class Time{
     private int numVitorias;
     private int numDerrotas;
     private int numEmpate;
-
-
+    private ArrayList<Time> jogospassados = new ArrayList<Time>();
+ 
+    /*Construtor*/
+    Time(String nome){
+        name = nome;
+    }
+    
     /* METODOS GTES E SETS */
 
     public String getName() {
@@ -79,6 +86,11 @@ public void showStatus(){
        "Empates : " + numEmpate + "\n"
  
     );
+}
+
+public void addJogoPassado(Time time)
+{
+    jogospassados.add(time);
 }
 
 };

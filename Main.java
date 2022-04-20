@@ -5,9 +5,9 @@ class Main {
 
     while(true){
 
-      
+      int opc = Menu.startMenu() ;
 
-      if(Menu.startMenu() == 0 ){break;}
+      if( opc == 0 ){break;}
     }
         
 
