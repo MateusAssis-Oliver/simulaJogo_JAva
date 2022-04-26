@@ -19,6 +19,14 @@ public class SimulaJogo
 
     /* METODOS GET E SET */
 
+    public Time getTimeA() {
+        return A;
+    }
+
+    public Time getTimeB() {
+        return B;
+    }
+
     public int getGolstimeA() {
         return golstimeA;
     }
@@ -33,6 +41,7 @@ public class SimulaJogo
         Random rand = new Random();
         golstimeA = rand.nextInt(8);
         golstimeB = rand.nextInt(8);
+        Menu.printTela("Gols "+ A.getName() + " : " + golstimeA + "\n" +"Gols "+ B.getName() + " : " + golstimeB);
         computarJogo();
     }
 

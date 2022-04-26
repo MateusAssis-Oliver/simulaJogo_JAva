@@ -36,7 +36,28 @@ public class Menu{
 
 	public static void printTabela(String [] tabela)
 	{
-		JOptionPane.showInputDialog(null, tabela);
+		JOptionPane.showMessageDialog(null, tabela);
+	}
+
+	public static void printTela(String print)
+	{
+		JOptionPane.showMessageDialog(null, print);
+	}
+
+	public static String janelaStrCamp(){
+		
+		String nome = JOptionPane.showInputDialog(null, "Insira o nome do Campeonato");
+
+		return nome;
+		
+	}
+
+	public static String janelaStrTime(){
+		
+		String nome = JOptionPane.showInputDialog(null, "Insira o nome do Time");
+
+		return nome;
+		
 	}
 
 

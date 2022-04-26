@@ -46,7 +46,16 @@ public class Campeonato{
     {
         if(jogospassados.size() > 0)
         {
-            return jogospassados.contains(jogo);
+            for(int i = 0; i < jogospassados.size();i++)
+            {
+                if(jogo.getTimeA() == jogospassados.get(i).getTimeA() || jogo.getTimeA() == jogospassados.get(i).getTimeB() &&
+                jogo.getTimeB() == jogospassados.get(i).getTimeA() || jogo.getTimeB() == jogospassados.get(i).getTimeB())
+                {
+                    return true;
+                }
+                
+            }
+            return false;
         }
         else
             return false;
@@ -54,19 +63,26 @@ public class Campeonato{
 
     public void criarJogo(Time time1, Time time2)
     {
-        SimulaJogo jogo = new SimulaJogo(time1, time2);
-        if(!verificarJogo(jogo))
+        if(times.size() >= 2)
         {
-            jogo.simularJogo();
-            jogospassados.add(jogo);
+            SimulaJogo jogo = new SimulaJogo(time1, time2);
+
+
+            if(!verificarJogo(jogo))
+            {
+                jogo.simularJogo();
+                jogospassados.add(jogo);
+            }
+            else
+            {
+                if(jogospassados.size() == 0)
+                    Menu.printErro("Impossivel simular jogo");
+                else
+                    Menu.printErro("Jogo ja aconteceu");
+            }
         }
         else
-        {
-            if(jogospassados.size() == 0)
-                Menu.printErro("Impossivel simular jogo");
-            else
-                Menu.printErro("Jogo ja aconteceu");
-        }
+            Menu.printErro("Não existe times suficiente");
     }
 
     public void imprimirTabela()
@@ -87,7 +103,7 @@ public class Campeonato{
 
     private void organizarTabela()
     {
-        Collections.sort(times, Comparator.comparing(Time::getPontuacao));
+        Collections.sort(times, Comparator.comparing(  Time::getPontuacao ));
     }
 
 };
