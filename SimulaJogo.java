@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class SimulaJogo
 {
     private Time A;
@@ -5,32 +7,73 @@ public class SimulaJogo
 	private int golstimeA;
     private int golstimeB;
 
-    /* METODOS GET E SET */
+    /********CONTRUTOR********/
 
-    public int getGolstimeA() {
-        return golstimeA;
-    }
-    public void setGolstimeA(int golstimeA) {
-        this.golstimeA = golstimeA;
-    }
-
-    public int getGolstimeB() {
-        return golstimeB;
-    }
-    public void setGolstimeB(int golstimeB) {
-        this.golstimeB = golstimeB;
-    }
-    /*******************************************/
-
-    public void simularJogo(Time A, Time B)
+    public SimulaJogo(Time A, Time B)
     {
         this.A = A;
         this.B = B;
     }
 
-    public void computarJogo()
+    /*************************/
+
+    /* METODOS GET E SET */
+
+    public int getGolstimeA() {
+        return golstimeA;
+    }
+
+    public int getGolstimeB() {
+        return golstimeB;
+    }
+    /*******************************************/
+
+    public void simularJogo()
     {
-        
+        Random rand = new Random();
+        golstimeA = rand.nextInt(8);
+        golstimeB = rand.nextInt(8);
+        computarJogo();
+    }
+
+    private void computarJogo()
+    {
+        if(golstimeA == golstimeB)
+        {
+            A.setGolsMarcados(golstimeA);
+            A.setGolsSofridos(golstimeB);
+            A.setNumJogos();
+            A.setNumEmpate();
+
+            B.setGolsMarcados(golstimeB);
+            B.setGolsSofridos(golstimeA);
+            B.setNumJogos();
+            B.setNumEmpate();
+        }
+        else if(golstimeA > golstimeB)
+        {
+            A.setGolsMarcados(golstimeA);
+            A.setGolsSofridos(golstimeB);
+            A.setNumJogos();
+            A.setNumVitorias();
+
+            B.setGolsMarcados(golstimeB);
+            B.setGolsSofridos(golstimeA);
+            B.setNumJogos();
+            B.setNumDerrotas();
+        }
+        else
+        {
+            B.setGolsMarcados(golstimeB);
+            B.setGolsSofridos(golstimeA);
+            B.setNumJogos();
+            B.setNumVitorias();
+
+            A.setGolsMarcados(golstimeA);
+            A.setGolsSofridos(golstimeB);
+            A.setNumJogos();
+            A.setNumDerrotas();
+        }
     }
 
 }

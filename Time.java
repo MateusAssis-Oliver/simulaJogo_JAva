@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Time{
 
     private String name;
@@ -11,7 +9,6 @@ public class Time{
     private int numVitorias;
     private int numDerrotas;
     private int numEmpate;
-    private ArrayList<Time> jogospassados = new ArrayList<Time>();
  
     /*Construtor*/
     Time(String nome){
@@ -23,15 +20,9 @@ public class Time{
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getPontuacao() {
         return pontuacao;
-    }
-    public void setPontuacao(int pontuacao) {
-        this.pontuacao += pontuacao;
     }
 
     public int getNumJogos() {
@@ -46,64 +37,54 @@ public class Time{
     }
     public void setGolsMarcados(int golsMarcados) {
         this.golsMarcados += golsMarcados;
+        saldoGols = golsMarcados - golsSofridos;
     }
     public int getGolsSofridos() {
         return golsSofridos;
     }
     public void setGolsSofridos(int golsSofridos) {
         this.golsSofridos += golsSofridos;
+        saldoGols = golsMarcados - golsSofridos;
     }
     public int getNumDerrotas() {
         return numDerrotas;
     }
     public void setNumDerrotas() {
         numDerrotas++;
+        pontuacao += 0;
     }
     public int getNumEmpate() {
         return numEmpate;
     }
     public void setNumEmpate() {
         numEmpate++;
-    }
-    public void setNumVitorias() {
-        numVitorias++;
+        pontuacao += 1;
     }
     public int getNumVitorias() {
         return numVitorias;
     }
-    public void setSaldoGols(int saldoGols) {
-        this.saldoGols = golsMarcados - golsSofridos;
-    }
-    public int getSaldoGols() {
-        return saldoGols;
+    public void setNumVitorias() {
+        numVitorias++;
+        pontuacao += 3;
     }
 /* *************************************************************************** */
 
 /* METODOS */
 
-public void showStatus(){
+public String showStatus(){
 
-    System.out.println(
-       "Nome : " + name + " - "  +
-       "Numero de Jogos : " + numJogos +   " - " +
-       "Sauldo de Gols : " + saldoGols +  " - "  +
-       "Gols Marcados : " + golsMarcados +   " - " +
-       "Gols Sofridos : " + golsSofridos +   " - " +
-       "Numero de Vitorias : " + numVitorias +   " - " +
-       "Numero de Derrotas : " + numDerrotas +   " - " +
-       "Empates : " + numEmpate + "\n"
+    return
+       "Nome: " + name + " - "  +
+       "Numero de Jogos: " + numJogos +   " - " +
+       "Sauldo de Gols: " + saldoGols +  " - "  +
+       "Gols Marcados: " + golsMarcados +   " - " +
+       "Gols Sofridos: " + golsSofridos +   " - " +
+       "Numero Vitorias: " + numVitorias +   " - " +
+       "Numero Derrotas: " + numDerrotas +   " - " +
+       "Empates: " + numEmpate +
+       "Pontuação: " + pontuacao + "\n";
  
-    );
 }
 
-public void addJogoPassado(Time time)
-{
-    jogospassados.add(time);
-}
-
-public boolean percorreJogoPassado(Time time)
-{
-    return jogospassados.contains(time);
-}
 
 };

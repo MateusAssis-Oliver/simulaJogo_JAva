@@ -7,15 +7,21 @@ public class Campeonato{
     private String nome;
     private int quantmaxtimes = 10;
     private ArrayList<Time> times = new ArrayList<Time>();
+    private ArrayList<SimulaJogo> jogospassados = new ArrayList<SimulaJogo>();
+
+    /*CONTRUTOR*/
+
+    public Campeonato(String nome)
+    {
+        this.nome = nome;
+    }
+
+    /************************/
 
     /*METODOS GET E SET*/
     public String getNome()
     {
         return nome;
-    }
-    public void setNome(String nome)
-    {
-        this.nome = nome;
     }
 
     public int getQuantMaxTimes()
@@ -36,17 +42,30 @@ public class Campeonato{
         }
     }
 
-    private boolean verificarJogo(Time time1, Time time2)
+    private boolean verificarJogo(SimulaJogo jogo)
     {
-        return time1.percorreJogoPassado(time2);
+        if(jogospassados.size() > 0)
+        {
+            return jogospassados.contains(jogo);
+        }
+        else
+            return false;
     }
 
     public void criarJogo(Time time1, Time time2)
     {
-        if(!verificarJogo(time1, time2))
+        SimulaJogo jogo = new SimulaJogo(time1, time2);
+        if(!verificarJogo(jogo))
         {
-            SimulaJogo simulajogo = new SimulaJogo();
-            simulajogo.simularJogo(time1,time2);
+            jogo.simularJogo();
+            jogospassados.add(jogo);
+        }
+        else
+        {
+            if(jogospassados.size() == 0)
+                Menu.printErro("Impossivel simular jogo");
+            else
+                Menu.printErro("Jogo ja aconteceu");
         }
     }
 
@@ -54,20 +73,21 @@ public class Campeonato{
     {
         if(!times.isEmpty())
         {
+            String [] tabela = new String[quantmaxtimes];
+            organizarTabela();
             for(int i = 0;i < quantmaxtimes;i++)
             {
-                times.get(i).showStatus();
+                tabela[i] = i+1 + times.get(i).showStatus();
             }
+            Menu.printTabela(tabela);
         }
+        else
+            Menu.printErro("Não existe times no compeonato");
     }
 
-    public void computarPodio()
+    private void organizarTabela()
     {
         Collections.sort(times, Comparator.comparing(Time::getPontuacao));
-        for(int i = 0; i < 3; i++)
-        {
-            System.out.println( i+1 + " " + times.get(i).getName() + " - ");
-        }
     }
 
 };

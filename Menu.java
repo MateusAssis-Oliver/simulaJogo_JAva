@@ -30,8 +30,13 @@ public class Menu{
 
     }
 
-    private static void printErro(String msg) {
+    public static void printErro(String msg) {
 		JOptionPane.showMessageDialog(null, msg,"Mensagem De Erro", JOptionPane.ERROR_MESSAGE);
+	}
+
+	public static void printTabela(String [] tabela)
+	{
+		JOptionPane.showInputDialog(null, tabela);
 	}
 
 

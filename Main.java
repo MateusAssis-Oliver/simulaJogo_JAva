@@ -9,8 +9,6 @@ class Main {
       
 
       if( opc == 3 ){break;}
-    }
-        
-
+    }       
   }
 }
