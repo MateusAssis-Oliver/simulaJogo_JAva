@@ -1,4 +1,6 @@
-public class Time{
+
+
+public class Time implements Comparable<Time>{
 
     private String name;
     private int pontuacao;
@@ -13,6 +15,14 @@ public class Time{
     /*Construtor*/
     Time(String nome){
         name = nome;
+        pontuacao = 0;
+        numJogos = 0;
+        saldoGols = 0;
+        golsMarcados = 0;
+        golsSofridos = 0;
+        numVitorias = 0;
+        numDerrotas = 0;
+        numEmpate = 0;
     }
     
     /* METODOS GTES E SETS */
@@ -30,6 +40,7 @@ public class Time{
     }
     public void setNumJogos() {
         numJogos++;
+        setSaldoGols();
     }
 
     public int getGolsMarcados() {
@@ -37,14 +48,12 @@ public class Time{
     }
     public void setGolsMarcados(int golsMarcados) {
         this.golsMarcados += golsMarcados;
-        saldoGols = golsMarcados - golsSofridos;
     }
     public int getGolsSofridos() {
         return golsSofridos;
     }
     public void setGolsSofridos(int golsSofridos) {
         this.golsSofridos += golsSofridos;
-        saldoGols = golsMarcados - golsSofridos;
     }
     public int getNumDerrotas() {
         return numDerrotas;
@@ -67,24 +76,42 @@ public class Time{
         numVitorias++;
         pontuacao += 3;
     }
+    
+    public int getSaldoGols()
+    {
+        return saldoGols;
+    }
+
+    private void setSaldoGols()
+    {
+        saldoGols = golsMarcados - golsSofridos;
+    }
+
+    @Override
+    public int compareTo(Time ptime) {
+        if(ptime.getPontuacao() != getPontuacao())
+            return Integer.compare(ptime.getPontuacao(), getPontuacao());
+        else
+            return Integer.compare(ptime.getSaldoGols(), getSaldoGols());
+    }
 /* *************************************************************************** */
 
 /* METODOS */
 
 public String showStatus(){
-
     return
-       "Nome: " + name + " - "  +
-       "Numero de Jogos: " + numJogos +   " - " +
-       "Sauldo de Gols: " + saldoGols +  " - "  +
-       "Gols Marcados: " + golsMarcados +   " - " +
-       "Gols Sofridos: " + golsSofridos +   " - " +
-       "Numero Vitorias: " + numVitorias +   " - " +
-       "Numero Derrotas: " + numDerrotas +   " - " +
-       "Empates: " + numEmpate +
-       "Pontuação: " + pontuacao + "\n";
+       "Nome: " + getName() + " - "  +
+       "Numero de Jogos: " + getNumJogos() +   " - " +
+       "Saldo de Gols: " + getSaldoGols() +  " - "  +
+       "Gols Marcados: " + getGolsMarcados() +   " - " +
+       "Gols Sofridos: " + getGolsSofridos() +   " - " +
+       "Numero Vitorias: " + getNumVitorias() +   " - " +
+       "Numero Derrotas: " + getNumDerrotas() +   " - " +
+       "Empates: " + getNumEmpate() + " - " +
+       "Pontuação: " + getPontuacao() + "\n";
  
 }
+
 
 
 };

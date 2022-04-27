@@ -5,7 +5,7 @@ public class Menu{
 
 	public static int startMenu(){
 
-		String opc = JOptionPane.showInputDialog(null, "1 - Cadastrar Time \n 2 - Simula Jogo \n 3 - Sair");
+		String opc = JOptionPane.showInputDialog(null, "1 - Cadastrar Time \n 2 - Simula Jogo \n 3 - Imprimir Tabela \n 4 - Sair");
 
 		return validaInt(opc);
 
@@ -34,7 +34,7 @@ public class Menu{
 		JOptionPane.showMessageDialog(null, msg,"Mensagem De Erro", JOptionPane.ERROR_MESSAGE);
 	}
 
-	public static void printTabela(String [] tabela)
+	public static void printTabela(String tabela)
 	{
 		JOptionPane.showMessageDialog(null, tabela);
 	}
