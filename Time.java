@@ -40,6 +40,7 @@ public class Time implements Comparable<Time>{
     }
     public void setNumJogos() {
         numJogos++;
+        setSaldoGols();
     }
 
     public int getGolsMarcados() {
@@ -90,15 +91,14 @@ public class Time implements Comparable<Time>{
     public int compareTo(Time ptime) {
         if(ptime.getPontuacao() != getPontuacao())
             return Integer.compare(ptime.getPontuacao(), getPontuacao());
-        return Integer.compare(ptime.getSaldoGols(), getSaldoGols());
+        else
+            return Integer.compare(ptime.getSaldoGols(), getSaldoGols());
     }
 /* *************************************************************************** */
 
 /* METODOS */
 
 public String showStatus(){
-
-    setSaldoGols();
     return
        "Nome: " + getName() + " - "  +
        "Numero de Jogos: " + getNumJogos() +   " - " +
