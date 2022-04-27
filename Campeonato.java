@@ -1,19 +1,21 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Campeonato{
 
     private String nome;
-    private int quantmaxtimes = 10;
-    private ArrayList<Time> times = new ArrayList<Time>();
-    private ArrayList<SimulaJogo> jogospassados = new ArrayList<SimulaJogo>();
+    private int quantmaxtimes;
+    private ArrayList<Time> times;
+    private ArrayList<SimulaJogo> jogospassados;
 
     /*CONTRUTOR*/
 
     public Campeonato(String nome)
     {
         this.nome = nome;
+        quantmaxtimes = 10;
+        times = new ArrayList<Time>();
+        jogospassados = new ArrayList<SimulaJogo>();
     }
 
     /************************/
@@ -32,24 +34,41 @@ public class Campeonato{
     {
         this.quantmaxtimes = quantmaxtimes;
     }
+
+    private int getIndexOf(Time time)
+    {
+        for(int i = 0; i < times.size();i++)
+        {
+            if(time.getName().equals(times.get(i).getName()))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
     /********************************************/
 
     public void cadastrarTimes(Time time)
     {
-        if(times.size() <= quantmaxtimes)
+        if(getIndexOf(time) == -1)
         {
-            times.add(time);
+            if(times.size() <= quantmaxtimes)
+            {
+                times.add(time);
+            }
         }
+        else
+            Menu.printErro("Time ja resgistrado");
     }
 
     private boolean verificarJogo(SimulaJogo jogo)
     {
         if(jogospassados.size() > 0)
         {
-            for(int i = 0; i < jogospassados.size();i++)
+            for(int i = 0; i < jogospassados.size(); i++)
             {
-                if(jogo.getTimeA() == jogospassados.get(i).getTimeA() || jogo.getTimeA() == jogospassados.get(i).getTimeB() &&
-                jogo.getTimeB() == jogospassados.get(i).getTimeA() || jogo.getTimeB() == jogospassados.get(i).getTimeB())
+                if((jogo.getTimeA().getName().equals(jogospassados.get(i).getTimeA().getName()) || jogo.getTimeA().getName().equals(jogospassados.get(i).getTimeB().getName())) &&
+                (jogo.getTimeB().getName().equals(jogospassados.get(i).getTimeA().getName()) || jogo.getTimeB().getName().equals(jogospassados.get(i).getTimeB().getName())))
                 {
                     return true;
                 }
@@ -65,21 +84,21 @@ public class Campeonato{
     {
         if(times.size() >= 2)
         {
-            SimulaJogo jogo = new SimulaJogo(time1, time2);
-
-
-            if(!verificarJogo(jogo))
+            int indext1 = getIndexOf(time1);
+            int indext2 = getIndexOf(time2);
+            if(indext1 >=0 && indext2 >=0)
             {
-                jogo.simularJogo();
-                jogospassados.add(jogo);
+                SimulaJogo jogo = new SimulaJogo(times.get(indext1), times.get(indext2));
+                if(!verificarJogo(jogo))
+                {
+                    jogo.simularJogo();
+                    jogospassados.add(jogo);
+                }
+                else
+                    Menu.printErro("Impossivel simular jogo");
             }
             else
-            {
-                if(jogospassados.size() == 0)
-                    Menu.printErro("Impossivel simular jogo");
-                else
-                    Menu.printErro("Jogo ja aconteceu");
-            }
+                Menu.printErro("Um dos times não foi cadastrado");
         }
         else
             Menu.printErro("Não existe times suficiente");
@@ -89,11 +108,11 @@ public class Campeonato{
     {
         if(!times.isEmpty())
         {
-            String [] tabela = new String[quantmaxtimes];
+            String tabela = new String();
             organizarTabela();
-            for(int i = 0;i < quantmaxtimes;i++)
+            for(int i = 0;i < times.size();i++)
             {
-                tabela[i] = i+1 + times.get(i).showStatus();
+                tabela += i+1 + " | " + times.get(i).showStatus();
             }
             Menu.printTabela(tabela);
         }
@@ -103,7 +122,9 @@ public class Campeonato{
 
     private void organizarTabela()
     {
-        Collections.sort(times, Comparator.comparing(  Time::getPontuacao ));
+        Collections.sort(times);
     }
+
+    
 
 };

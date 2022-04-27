@@ -22,12 +22,14 @@ class Main {
           Time timeB = new Time(TimeB);
           camp.criarJogo(timeA, timeB);
           break;
+        case 3:
+          camp.imprimirTabela();
         default:
           break;
       }
       
 
-      if( opc == 3 ){break;}
+      if( opc == 4 ){break;}
     }       
   }
 }
